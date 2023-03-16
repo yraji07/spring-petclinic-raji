@@ -1,11 +1,11 @@
 pipeline {
-    agent { label 'MAVEN_17' }
+    agent { label 'UBUNTU_NODE' }
     
     stages {
         stage('vcs') {
             steps {
                 git url: 'https://github.com/yraji07/spring-petclinic-raji.git',
-                    branch: 'main'
+                    branch: 'develop'
             }
         }
         stage('build') {
