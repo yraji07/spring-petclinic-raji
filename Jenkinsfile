@@ -1,6 +1,6 @@
 pipeline {
     agent { label 'MAVEN_17' }
-    }
+    
     stages {
         stage('vcs') {
             steps {
@@ -20,6 +20,5 @@ pipeline {
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
         }
-    }   
-
-}
+    } 
+}  
