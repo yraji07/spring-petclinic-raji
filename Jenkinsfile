@@ -13,7 +13,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "mvn ${params.MAVEN_GOAL}"
+                sh "mvn package"
             }
         }
         stage('post build') {
