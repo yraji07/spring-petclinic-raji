@@ -1,16 +1,16 @@
 pipeline {
-    agent { label 'MAVEN_17' }
+    agent { label 'UBUNTU_NODE' }
     
     stages {
         stage('vcs') {
             steps {
                 git url: 'https://github.com/yraji07/spring-petclinic-raji.git',
-                    branch: 'main'
+                    branch: 'develop'
             }
         }
         stage('build') {
             steps {
-                sh "mvnw package"
+                sh "mvn package"
             }
         }
         stage('post build') {
@@ -19,6 +19,17 @@ pipeline {
                                  onlyIfSuccessful: true
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
+        
         }
-    } 
-}  
+        stage('Sonarcloud') {
+            steps {
+                sh 'mvn clean verify sonar:sonar \
+                    -Dsonar.login=d57643b0cc640b2ed7dd0b25e64181d156469ceb \
+                    -Dsonar.host.url=https://sonarcloud.io \
+                    -Dsonar.organization=rajisonarcube \
+                    -Dsonar.projectKey=rajisonarcube'
+            }
+        }
+    }
+
+}
