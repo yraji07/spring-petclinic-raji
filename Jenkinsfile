@@ -30,6 +30,11 @@ pipeline {
                     -Dsonar.projectKey=rajisonarcube'
             }
         }
-    }
+        stage('uploading spc s3 bucket ') {
+            steps {
+               sh 'aws s3 cp /home/ubuntu/workspace/NEW-SPC/target/spring-petclinic-3.0.0-SNAPSHOT.jar s3://mybucket/rajibucket123'
 
+            }
+        }
+    }
 }
